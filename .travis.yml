@@ -51,7 +51,7 @@ script:
  - read -a PKGS <<< "hackage-security hackage-security-http-client hackage-security-curl hackage-security-HTTP hackage-security hackage-root-tool hackage-repo-tool example-client"
  - rm -rf sdists; mkdir sdists
  - for PKG in "${PKGS[@]}"; do
-     cd "$PKG"; cabal sdist --output-directory="../sdists/$PKG" || break; cd ..;
+     mkdir "sdists/$PKG"; cd "$PKG"; cabal new-sdist --output-dir="../sdists/$PKG"; cd ..; tar -xf "sdists/$PKG/$PKG"-*.tar.gz -C "sdists/$PKG";
    done
  - cd sdists/
 
